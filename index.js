@@ -4,7 +4,7 @@ const width = (canvas.width = 320);
 const height = (canvas.height = 480);
 const boxwidth = 30;
 const boxheight = 60;
-const gravity = 0.5;
+const gravity = 0.1;
 
 // canvas centered in window
 canvas.style.marginTop = window.innerHeight / 2 - height / 2 + "px";
@@ -29,6 +29,11 @@ function update() {
     // velocity has magnitude and direction. 
     box.vel.y += gravity;
     box.y += box.vel.y;
+
+    if (box.y + box.h > height) {
+      box.y = height - box.h;
+      box.vel.y *= -1;
+    }
 
     context.fillStyle = box.color;
     context.fillRect(box.x, box.y, box.w, box.h);
