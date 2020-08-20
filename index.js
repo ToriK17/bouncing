@@ -4,6 +4,7 @@ const width = (canvas.width = 320);
 const height = (canvas.height = 480);
 const boxwidth = 30;
 const boxheight = 60;
+const gravity = 0.5;
 
 // canvas centered in window
 canvas.style.marginTop = window.innerHeight / 2 - height / 2 + "px";
@@ -25,7 +26,9 @@ context.fillRect(box.x, box.y, box.w, box.h);
 // 'request animation frame' works to create a function that repeates itself over time. 
 function update() {
     context.clearRect(0, 0, width, height);
-    box.y += 0.5;
+    // velocity has magnitude and direction. 
+    box.vel.y += gravity;
+    box.y += box.vel.y;
 
     context.fillStyle = box.color;
     context.fillRect(box.x, box.y, box.w, box.h);
